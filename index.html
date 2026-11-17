@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOT HUB · Staroltest 热点站群导航</title>
+<meta name="description" content="Staroltest 官方导航站：一个入口，逛遍全部 HOT 站点——跨境电商选品、独立游戏、Muse 热点、工具发现与化石时间机器。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+<style>
+:root{
+  --bg:#f7f7f8; --surface:#ffffff; --surface2:#f1f1f4; --text:#18181b; --muted:#6b7280;
+  --border:#e7e7ea; --accent:#f43f5e; --accent2:#f97316;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px -12px rgba(16,24,40,.12);
+  --shadow-hover:0 2px 4px rgba(16,24,40,.06),0 16px 40px -16px rgba(16,24,40,.25);
+}
+html[data-theme="dark"]{
+  --bg:#0c0c0e; --surface:#17171a; --surface2:#1f1f23; --text:#f4f4f5; --muted:#9ca3af;
+  --border:#26262b; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-hover:0 2px 4px rgba(0,0,0,.5),0 16px 40px -16px rgba(0,0,0,.8);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+/* header */
+header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.6) blur(12px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;gap:28px;height:62px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:.2px}
+.logo .flame{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:19px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 4px 14px -4px rgba(244,63,94,.55)}
+.logo small{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:1.5px}
+.nav .links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;color:var(--muted);font-weight:500}
+.nav .links a:hover{color:var(--text)}
+.nav .gh{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border:1px solid var(--border);border-radius:999px;font-size:13.5px;font-weight:600;background:var(--surface)}
+.nav .gh:hover{border-color:var(--muted)}
+#themeBtn{border:1px solid var(--border);background:var(--surface);width:36px;height:36px;border-radius:999px;cursor:pointer;font-size:15px}
+/* hero */
+.hero{padding:72px 0 30px;text-align:center}
+.hero .kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:2px;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);padding:6px 14px;border-radius:999px;margin-bottom:20px}
+.hero h1{font-size:clamp(32px,5.4vw,54px);line-height:1.18;font-weight:850;letter-spacing:-.5px}
+.hero h1 .grad{background:linear-gradient(92deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:18px auto 0;max-width:640px;color:var(--muted);font-size:16.5px}
+.stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:30px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 22px;box-shadow:var(--shadow)}
+.stat b{font-size:19px;display:block;line-height:1.3}
+.stat span{font-size:12.5px;color:var(--muted)}
+/* search + filter */
+.tools{display:flex;flex-direction:column;align-items:center;gap:16px;margin:38px 0 8px}
+.search{width:min(560px,100%);position:relative}
+.search input{width:100%;padding:14px 18px 14px 46px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:15px;box-shadow:var(--shadow);outline:none}
+.search input:focus{border-color:var(--accent)}
+.search .ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.45}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{padding:7px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer}
+.chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;padding:26px 0 10px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;transition:transform .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.card .top{display:flex;align-items:center;gap:14px}
+.tile{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:21px;position:relative;overflow:hidden}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
+.card h3{font-size:17.5px;line-height:1.35}
+.card .host{font-size:12.5px;color:var(--muted)}
+.card .tag{font-size:14px;color:var(--muted);flex:1}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--surface2);color:var(--muted)}
+.badge.cat{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent)}
+.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:5px;box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+.visit{margin-top:2px;font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:6px}
+.visit:hover{color:var(--accent)}
+.card.soon{border-style:dashed;align-items:center;justify-content:center;text-align:center;color:var(--muted);min-height:190px;box-shadow:none;background:transparent}
+.empty{display:none;text-align:center;color:var(--muted);padding:36px 0}
+/* about */
+.about{margin:56px 0 10px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
+.about h2{font-size:21px;margin-bottom:10px}
+.about p{color:var(--muted);font-size:15px;max-width:760px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+.step{background:var(--surface2);border-radius:14px;padding:16px}
+.step b{display:block;margin-bottom:4px}
+.step span{font-size:13.5px;color:var(--muted)}
+footer{margin-top:56px;border-top:1px solid var(--border);padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+.foot{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+@media (max-width:640px){.nav .links{display:none}.hero{padding:48px 0 20px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><span class="flame">🔥</span>HOT HUB <small>STAROLTEST</small></a>
+    <nav class="links">
+      <a href="#sites">全部站点</a>
+      <a href="#about">关于站群</a>
+    </nav>
+    <a class="gh" href="https://github.com/Staroltest" target="_blank" rel="noopener">GitHub ↗</a>
+    <button id="themeBtn" title="切换深浅色">🌙</button>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <span class="kicker">STAROLTEST 官方导航</span>
+  <h1>一个入口，逛遍所有 <span class="grad">HOT 站点</span></h1>
+  <p>这里聚合了 Staroltest 的全部站点：每个 HOT 站每天从公开信源采集、按规则打分、精选出真正值得看的几条；还有一个可以动手玩的时间机器。</p>
+  <div class="stats">
+    <div class="stat"><b>8 个</b><span>已上线站点</span></div>
+    <div class="stat"><b>每天 06:00</b><span>各站日报出刊（北京时间）</span></div>
+    <div class="stat"><b>MIT 开源</b><span>全部站点源码开放</span></div>
+  </div>
+  <div class="tools">
+    <div class="search">
+      <span class="ico">🔍</span>
+      <input id="q" type="search" placeholder="搜索站点：试试「游戏」「工具」「电商」…">
+    </div>
+    <div class="chips" id="chips">
+      <button class="chip on" data-cat="all">全部</button>
+      <button class="chip" data-cat="电商选品">电商选品</button>
+      <button class="chip" data-cat="独立游戏">独立游戏</button>
+      <button class="chip" data-cat="AI 热点">AI 热点</button>
+      <button class="chip" data-cat="AI 工具">AI 工具</button>
+      <button class="chip" data-cat="工具发现">工具发现</button>
+      <button class="chip" data-cat="免费游戏">免费游戏</button>
+      <button class="chip" data-cat="港股打新">港股打新</button>
+      <button class="chip" data-cat="互动体验">互动体验</button>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="grid" id="sites">
+    <article class="card" data-cat="电商选品" data-search="跨境电商选品hot 选品趋势、爆款发现与测品实战，每天 06:00 一期日报。 电商选品 ecommerce-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">跨<img src="https://ecommerce-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>跨境电商选品HOT</h3><div class="host">ecommerce-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">选品趋势、爆款发现与测品实战，每天 06:00 一期日报。</p>
+      <div class="meta">
+        <span class="badge cat">电商选品</span>
+        <span class="badge">每日 06:00 更新</span>
+        <span class="badge">2026-11-13 上线</span>
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://ecommerce-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="独立游戏" data-search="indiehot 每天盯着独立游戏圈，值得开发者看的，只有几条。 独立游戏 indie-game-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">I<img src="https://indie-game-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>IndieHOT</h3><div class="host">indie-game-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">每天盯着独立游戏圈，值得开发者看的，只有几条。</p>
+      <div class="meta">
+        <span class="badge cat">独立游戏</span>
+        <span class="badge">每日 06:00 更新</span>
+        
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://indie-game-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="AI 热点" data-search="musehot 每天盯着全球 muse 的新玩法，值得看的，只有几条。 ai 热点 muse-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#6366f1,#06b6d4)">M<img src="https://muse-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>MuseHOT</h3><div class="host">muse-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">每天盯着全球 Muse 的新玩法，值得看的，只有几条。</p>
+      <div class="meta">
+        <span class="badge cat">AI 热点</span>
+        <span class="badge">每日 06:00 更新</span>
+        <span class="badge">2026-11-15 上线</span>
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://muse-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="AI 工具" data-search="ai工具与模型hot 新模型、新工具，每天只给值得点开的那几条。 ai 工具 ai-tool-model-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#06b6d4,#8b5cf6)">A<img src="https://ai-tool-model-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>AI工具与模型HOT</h3><div class="host">ai-tool-model-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">新模型、新工具，每天只给值得点开的那几条。</p>
+      <div class="meta">
+        <span class="badge cat">AI 工具</span>
+        <span class="badge">新上线</span>
+        <span class="badge">2026-11-17 上线</span>
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://ai-tool-model-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="工具发现" data-search="工具站 hot 每天从各个源中发现最新工具站，只收点开就能用的工具。 工具发现 tool-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#10b981,#3b82f6)">工<img src="https://tool-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>工具站 HOT</h3><div class="host">tool-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">每天从各个源中发现最新工具站，只收点开就能用的工具。</p>
+      <div class="meta">
+        <span class="badge cat">工具发现</span>
+        <span class="badge">每日 06:00 更新</span>
+        <span class="badge">2026-11-15 上线</span>
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://tool-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="免费游戏" data-search="免费游戏hot 每周免费游戏领取日历：只列能领的，不列过期的。 免费游戏 free-game-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#22c55e,#0ea5e9)">免<img src="https://free-game-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>免费游戏HOT</h3><div class="host">free-game-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">每周免费游戏领取日历：只列能领的，不列过期的。</p>
+      <div class="meta">
+        <span class="badge cat">免费游戏</span>
+        <span class="badge">新上线</span>
+        <span class="badge">2026-11-17 上线</span>
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://free-game-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="港股打新" data-search="港股ipo hot 港股打新日历：招股中、即将上市、今日上市与暗盘全收录 港股打新 hk-ipo-hot">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#dc2626,#f59e0b)">港<img src="https://hk-ipo-hot.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>港股IPO HOT</h3><div class="host">hk-ipo-hot.pages.dev</div></div>
+      </div>
+      <p class="tag">港股打新日历：招股中、即将上市、今日上市与暗盘全收录</p>
+      <div class="meta">
+        <span class="badge cat">港股打新</span>
+        <span class="badge">新上线</span>
+        <span class="badge">2026-11-17 上线</span>
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://hk-ipo-hot.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <article class="card" data-cat="互动体验" data-search="化石时间机器 从寒武纪到今天，拖动地质时间轴，看生命在地图上出现、繁盛、灭绝、再出现。数据：古生物数据库 pbdb。 互动体验 fossil-time-machine-preview">
+      <div class="top">
+        <div class="tile" style="background:linear-gradient(135deg,#d97706,#65a30d)">化<img src="https://fossil-time-machine-preview.pages.dev/favicon.svg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div><h3>化石时间机器</h3><div class="host">fossil-time-machine-preview.pages.dev</div></div>
+      </div>
+      <p class="tag">从寒武纪到今天，拖动地质时间轴，看生命在地图上出现、繁盛、灭绝、再出现。数据：古生物数据库 PBDB。</p>
+      <div class="meta">
+        <span class="badge cat">互动体验</span>
+        <span class="badge">互动体验</span>
+        
+        <span class="badge"><span class="dot"></span>运营中</span>
+      </div>
+      <a class="visit" href="https://fossil-time-machine-preview.pages.dev" target="_blank" rel="noopener">访问站点 <span>→</span></a>
+    </article>
+    <div class="card soon">
+      <div style="font-size:26px">🚀</div>
+      <div><b>下一个 HOT 站点</b><br>正在路上，上线后会自动出现在这里</div>
+    </div>
+  </div>
+  <div class="empty" id="empty">没有找到匹配的站点，换个关键词试试。</div>
+
+  <section class="about" id="about">
+    <h2>关于这个站群</h2>
+    <p>所有 HOT 站点都由同一条「HOT 流水线」生成：从公开 RSS 信源采集动态，用规则（时效、相关度、来源）打分精选，每天出一期日报。每个站点只展示标题、一句自写的简介和原文链接，不转载全文。</p>
+    <div class="steps">
+      <div class="step"><b>① 采集</b><span>公开信源，定期拉取，只收目标领域的内容</span></div>
+      <div class="step"><b>② 打分</b><span>规则打分，不是 AI 打分：时效、相关度、来源权重</span></div>
+      <div class="step"><b>③ 出报</b><span>每天精选 10 条左右，06:00 准时出刊</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Staroltest · HOT HUB 站群导航</span>
+    <span>本站由 HOT 流水线生成 · 最后更新 2026-11-17</span>
+    <a href="https://github.com/Staroltest/staroltest-hot" target="_blank" rel="noopener">本站源码 ↗</a>
+  </div>
+</footer>
+
+<script>
+const root=document.documentElement;
+const saved=localStorage.getItem("theme");
+if(saved){root.dataset.theme=saved}else if(matchMedia("(prefers-color-scheme: dark)").matches){root.dataset.theme="dark"}
+const btn=document.getElementById("themeBtn");
+const syncBtn=()=>btn.textContent=root.dataset.theme==="dark"?"☀️":"🌙";syncBtn();
+btn.onclick=()=>{root.dataset.theme=root.dataset.theme==="dark"?"light":"dark";localStorage.setItem("theme",root.dataset.theme);syncBtn()};
+const cards=[...document.querySelectorAll(".card[data-cat]")];
+const q=document.getElementById("q"), empty=document.getElementById("empty");
+let cat="all";
+function apply(){
+  const kw=q.value.trim().toLowerCase();let n=0;
+  cards.forEach(c=>{
+    const ok=(cat==="all"||c.dataset.cat===cat)&&(!kw||c.dataset.search.includes(kw));
+    c.style.display=ok?"":"none";if(ok)n++;
+  });
+  empty.style.display=n?"none":"block";
+}
+q.addEventListener("input",apply);
+document.getElementById("chips").addEventListener("click",e=>{
+  const b=e.target.closest(".chip");if(!b)return;
+  document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");cat=b.dataset.cat;apply();
+});
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "206a1e92238e4f2cb6710f2b870cf834"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
